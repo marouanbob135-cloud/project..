@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Studio: draw, design, create</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;700;900&display=swap">
+<style>
+:root{--bg:#F1EEFF;--card:#FFFFFF;--ink:#1B1540;--mute:#5E5880;--line:#CFC8F2;--lime:#B8F02B;--coral:#FF4F72;--sky:#27B5E8;--vio:#8A4FE0;--sun:#FFB627;--on:#1B1540;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#120E29;--card:#1E1941;--ink:#F4F1FF;--mute:#B1A9DA;--line:#3A3366;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#120E29;--card:#1E1941;--ink:#F4F1FF;--mute:#B1A9DA;--line:#3A3366;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 Nunito,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+h1,h2,h3{font-family:"Lilita One","Trebuchet MS",sans-serif;font-weight:400;margin:0;line-height:1.05}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+/* home */
+.home{padding:44px 0 60px}
+.home h1{font-size:clamp(46px,9vw,98px);transform:rotate(-1.5deg)}
+.home h1 em{font-style:normal;color:var(--coral)}
+.home p.sub{max-width:48ch;color:var(--mute);font-size:19px;margin:14px 0 34px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tile{--c:var(--lime);position:relative;text-align:left;border:3px solid var(--ink);background:var(--c);color:var(--on);border-radius:26px 14px 28px 16px;padding:22px 22px 20px;min-height:170px;cursor:pointer;font:inherit;box-shadow:6px 6px 0 var(--ink);transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s;animation:in .6s both}
+.tile:nth-child(2){animation-delay:.08s}.tile:nth-child(3){animation-delay:.16s}.tile:nth-child(4){animation-delay:.24s}.tile:nth-child(5){animation-delay:.32s}
+.tile:hover,.tile:focus-visible{transform:translate(-3px,-5px) rotate(-1.2deg);box-shadow:10px 11px 0 var(--ink)}
+.tile:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
+.tile .ic{font-size:46px;display:block;transition:transform .4s}
+.tile:hover .ic{transform:rotate(14deg) scale(1.15)}
+.tile h3{font-size:30px;margin-top:6px}
+.tile span.go{position:absolute;right:18px;bottom:16px;font:900 15px Nunito;background:var(--on);color:#fff;border-radius:99px;padding:5px 14px}
+@keyframes in{from{opacity:0;transform:translateY(30px) rotate(3deg)}to{opacity:1;transform:none}}
+/* section panel */
+.panel{position:fixed;inset:0;z-index:10;background:var(--bg);overflow-y:auto;display:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.panel.on{display:block;animation:open .6s cubic-bezier(.7,0,.2,1) both}
+@keyframes open{from{clip-path:circle(0 at var(--x,50%) var(--y,50%))}to{clip-path:circle(160% at var(--x,50%) var(--y,50%))}}
+.band{background:var(--c);color:var(--on);border-bottom:3px solid var(--ink);padding:26px 0 30px}
+.band h2{font-size:clamp(40px,7vw,72px)}
+.band p{max-width:56ch;margin:8px 0 0;font-weight:700}
+.back{border:3px solid var(--ink);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 18px;font:900 15px Nunito;cursor:pointer;margin-bottom:16px;transition:transform .2s}
+.back:hover{transform:translateX(-4px)}
+.ex h3{font-size:30px;margin:30px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.slot{aspect-ratio:4/3;background:var(--card);border:3px dashed var(--line);border-radius:18px 10px 20px 12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;color:var(--mute);font-size:14px;font-weight:700;overflow:hidden}
+.slot img,.slot video{width:100%;height:100%;object-fit:cover}
+.svc{aspect-ratio:auto;min-height:110px;flex-direction:column;border-style:solid;border-color:var(--ink);color:var(--ink);font-size:24px;font-family:"Lilita One",sans-serif;font-weight:400}
+.svc small{font:700 13px Nunito;color:var(--mute)}
+.terms{margin-top:22px;border-left:8px solid var(--coral);background:var(--card);border-radius:8px;padding:14px 18px;font-size:15px}
+.cta{display:block;margin:36px auto 70px;background:var(--ink);color:var(--bg);border:0;border-radius:99px;padding:18px 44px;font:400 28px "Lilita One",sans-serif;cursor:pointer;box-shadow:0 8px 0 var(--c);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-3px);box-shadow:0 11px 0 var(--c)}
+.cta:active{transform:translateY(6px);box-shadow:0 2px 0 var(--c)}
+/* modal */
+.shade{position:fixed;inset:0;z-index:20;background:rgba(10,6,30,.7);display:none;align-items:center;justify-content:center;padding:16px}
+.shade.on{display:flex}
+.box{width:100%;max-width:520px;max-height:92vh;overflow-y:auto;background:var(--card);border:3px solid var(--ink);border-radius:26px 14px 28px 16px;padding:24px;box-shadow:8px 8px 0 var(--c);animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.7) rotate(-3deg);opacity:0}to{transform:none;opacity:1}}
+.box h3{font-size:32px;margin-bottom:12px}
+.box form{display:grid;gap:12px}
+label{display:grid;gap:4px;font-weight:700;font-size:14px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{background:var(--c);color:var(--on);border:3px solid var(--ink);border-radius:99px;padding:11px 24px;font:900 16px Nunito;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--ink)}
+.done{display:none;text-align:center}
+.done .em{font:400 26px "Lilita One",sans-serif;background:var(--lime);color:#1B1540;border:3px solid var(--ink);border-radius:14px;padding:12px;margin:14px 0;word-break:break-all}
+.box.sent form{display:none}.box.sent .done{display:block}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap home">
+<h1>Draw it. Film it. <em>Build it.</em></h1>
+<p class="sub">Hand-drawn characters, thumbnails, lesson videos and websites for teachers and small businesses. Tap a button to see my work.</p>
+<div class="tiles" id="tiles"></div>
+</div>
+<div id="panels"></div>
+<div class="shade" id="shade" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="box" id="box">
+<form id="f"></form>
+<div class="done"><h3>You’re registered!</h3><p>Thank you. To finish, send me your request by email:</p><div class="em" id="em"></div>
+<div class="row" style="justify-content:center"><a class="btn" id="mailbtn" href="#">Open my email app</a><button class="btn ghost" type="button" id="close2">Close</button></div></div>
+</div></div>
+
+<script>
+var EMAIL="your@email.com"; /* CHANGE THIS to your real email */
+var S=[
+{id:"characters",t:"Character design",ic:"✏️",c:"var(--lime)",lead:"Hand-drawn cartoon teachers, mascots and story characters, made by me on paper and cleaned up for videos, logos and posters.",ex:["Sketch next to the finished colored version","Mascot for a small shop","Cartoon teacher in 3 poses","Time-lapse of me drawing"],opts:["One character","Character with poses","Mascot and logo","Something else"]},
+{id:"thumbnails",t:"Thumbnails & images",ic:"🖼️",c:"var(--sun)",lead:"Eye-catching YouTube thumbnails, social posts and illustrations that match your channel or brand.",ex:["Thumbnail beside its video","Before and after","Instagram post set","Lesson cover image"],opts:["Single thumbnail","Set of thumbnails","Social media images","Illustration"]},
+{id:"videos",t:"Lesson videos & editing",ic:"🎬",c:"var(--sky)",lead:"I turn a lesson into a clear video with drawings, text and sound, or edit and montage your own raw footage.",ex:["Lesson video, 15–30 second clip","Raw clip vs final edit","Montage for a small business","Animated explanation"],opts:["Lesson video","Video editing","Montage","Something else"]},
+{id:"websites",t:"Websites",ic:"🌐",c:"var(--vio)",lead:"A simple, clean website with your services, photos and a contact form for your small business or teaching work.",ex:["Shop website","Teacher portfolio site","Restaurant page","Before and after redesign"],opts:["One-page site","Multi-page site","Site and mascot","Redesign my site"]},
+{id:"subs",t:"Subscriptions",ic:"⭐",c:"var(--coral)",lead:"ChatGPT, Claude, Spotify, Snapchat+ and Netflix. Tell me what you need and I’ll confirm the details by email.",svc:["ChatGPT","Claude","Spotify","Snapchat+","Netflix"],opts:["ChatGPT","Claude","Spotify","Snapchat+","Netflix"]}
+];
+var tiles=document.getElementById("tiles"),panels=document.getElementById("panels"),cur=null;
+S.forEach(function(s){
+ var b=document.createElement("button");b.className="tile";b.style.setProperty("--c",s.c);
+ b.innerHTML='<span class="ic">'+s.ic+'</span><h3>'+s.t+'</h3><span class="go">Open</span>';
+ b.onclick=function(e){openP(s.id,e.clientX,e.clientY)};tiles.appendChild(b);
+ var p=document.createElement("div");p.className="panel";p.id="p-"+s.id;p.style.setProperty("--c",s.c);
+ var h='<div class="band"><div class="wrap"><button class="back" data-back>← Back</button><h2>'+s.ic+' '+s.t+'</h2><p>'+s.lead+'</p></div></div><div class="wrap ex"><h3>'+(s.svc?'What I offer':'My work')+'</h3><div class="grid">';
+ if(s.svc){s.svc.forEach(function(n){h+='<div class="slot svc">'+n+'<small>Details confirmed by email</small></div>'})}
+ else{s.ex.forEach(function(e){h+='<div class="slot">Put your example here:<br>'+e+'</div>'})}
+ h+='</div>';
+ if(s.svc)h+='<div class="terms"><b>Before you pay anything,</b> I tell you exactly what you receive (activation on your own account, a code, or another type of access) and the warranty. This studio is not affiliated with Netflix, Spotify, OpenAI, Anthropic or Snap Inc.</div>';
+ h+='<button class="cta" data-order="'+s.id+'">'+(s.svc?'Order or ask for info':'Order or ask for info')+'</button></div>';
+ p.innerHTML=h;panels.appendChild(p);
+});
+function openP(id,x,y){var p=document.getElementById("p-"+id);p.style.setProperty("--x",(x||innerWidth/2)+"px");p.style.setProperty("--y",(y||innerHeight/2)+"px");p.classList.add("on");p.scrollTop=0;cur=id;document.body.style.overflow="hidden";try{history.replaceState(null,"","#"+id)}catch(e){}}
+function closeP(){document.querySelectorAll(".panel.on").forEach(function(p){p.classList.remove("on")});cur=null;document.body.style.overflow="";try{history.replaceState(null,"",location.pathname)}catch(e){}}
+var shade=document.getElementById("shade"),box=document.getElementById("box"),f=document.getElementById("f");
+function openM(id){var s=S.filter(function(x){return x.id==id})[0];box.classList.remove("sent");box.style.setProperty("--c",s.c);
+ f.dataset.title=s.t;
+ f.innerHTML='<h3 id="mt">'+s.t+'</h3><label>Name<input name="Name" required></label><label>Email<input name="Email" type="email" required></label><label>WhatsApp (optional)<input name="WhatsApp"></label>'
+ +'<label>What do you want?<select name="Choice">'+s.opts.map(function(o){return"<option>"+o+"</option>"}).join("")+'</select></label>'
+ +'<label>Tell me more<textarea name="Details" required placeholder="Your idea, style, deadline..."></textarea></label>'
+ +'<div class="row"><button class="btn" type="submit">Register</button><button class="btn ghost" type="button" id="close1">Cancel</button></div>';
+ document.getElementById("close1").onclick=closeM;shade.classList.add("on");f.querySelector("input").focus()}
+function closeM(){shade.classList.remove("on")}
+f.addEventListener("submit",function(e){e.preventDefault();var L=[];new FormData(f).forEach(function(v,k){if(v)L.push(k+": "+v)});
+ document.getElementById("em").textContent=EMAIL;
+ document.getElementById("mailbtn").href="mailto:"+EMAIL+"?subject="+encodeURIComponent(f.dataset.title+" request")+"&body="+encodeURIComponent(L.join("\n"));
+ box.classList.add("sent")});
+document.getElementById("close2").onclick=closeM;
+shade.addEventListener("click",function(e){if(e.target===shade)closeM()});
+document.addEventListener("click",function(e){var t=e.target;if(t.hasAttribute("data-back"))closeP();if(t.hasAttribute("data-order"))openM(t.getAttribute("data-order"))});
+document.addEventListener("keydown",function(e){if(e.key=="Escape"){shade.classList.contains("on")?closeM():closeP()}});
+var h=location.hash.slice(1);if(S.some(function(x){return x.id==h}))openP(h);
+</script>
+</body>
+</html>
